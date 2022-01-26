@@ -3,10 +3,12 @@
 CENTOS7
 1gb ram, 1 processor, 20gb hdd1, 4gb hdd2, NAT
 # Changing hostname on both nodes
-> `(NODE1) su -`
-> `(NODE1) hostname node1`
-> `(NODE2) su -`
-> `(NODE2) hostname node2`
+> ```
+> (NODE1) su -
+> (NODE1) hostname node1
+> (NODE2) su -
+> (NODE2) hostname node2
+> ```
 # Adding the IP of both nodes to hosts file
 > `(NODE1) vim /etc/hosts`
 > `192.168.141.132 node1`
