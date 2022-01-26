@@ -13,8 +13,8 @@ CENTOS7
 
 ```
 > (NODE1) vim /etc/hosts
-> 192.168.141.132 node1
-> 192.168.141.130 node2
+ 192.168.141.132 node1
+ 192.168.141.130 node2
 > (NODE1) scp /etc/hosts 192.168.141.130:/etc/
  ```
 # Test the connection
@@ -37,8 +37,8 @@ CENTOS7
 # Edit the ntp.conf file on node1
  ```
 > (NODE1) vim /etc/ntp.conf
-> restrict 127.0.0.1
-> server 127.127.1.0
+ restrict 127.0.0.1
+ server 127.127.1.0
 > (NODE1) watch ntpq -p -n
 > (NODE1) service ntpd restart
 > (NODE1) watch ntpq -p -n
@@ -46,8 +46,8 @@ CENTOS7
 # Edit the ntp.conf file on node2
  ```
 > (NODE2) vim /etc/ntp.conf
-> Comment all server lines
-> server 192.168.141.132
+ Comment all server lines
+ server 192.168.141.132
 > (NODE2) watch ntpq -p -n
 > (NODE2) service ntpd restart
 > (NODE2) watch ntpq -p -n
@@ -69,20 +69,21 @@ CENTOS7
 # Edit the drbd.conf file on both nodes
  ```
 > (NODE1) vim /etc/drbd.conf
-> resource r0 {
-> protocol C;
-> on node1 {
-> device /dev/drbd0;
-> disk /dev/vgdrbd/lvdrbd;
-> address 192.168.141.132:7788;
-> meta-disk internal;
-> }
-> on node2 {
-> device /dev/drbd0;
-> disk /dev/vgdrbd/lvdrbd;
-> address 192.168.141.130:7788;
-> meta-disk internal;
-> } }
+ resource r0 {
+ protocol C;
+ on node1 {
+ device /dev/drbd0;
+ disk /dev/vgdrbd/lvdrbd;
+ address 192.168.141.132:7788;
+ meta-disk internal;
+ }
+ on node2 {
+ device /dev/drbd0;
+ disk /dev/vgdrbd/lvdrbd;
+ address 192.168.141.130:7788;
+ meta-disk internal;
+ }
+  }
 > (NODE1) scp /etc/drbd.conf node2:/etc/drbd.conf
  ```
 # Disable the firewall and SELINUX on both nodes
@@ -90,7 +91,7 @@ CENTOS7
 > (BOTH NODES) systemctl stop firewalld
 > (BOTH NODES) systemctl disable firewalld
 > (NODE1) vim /etc/sysconfig/selinux
-> selinux=disabled
+ selinux=disabled
 > (NODE1) scp /etc/sysconfig/selinux node2:/etc/sysconfig/
  ```
 # Create metadata block
@@ -141,6 +142,5 @@ CENTOS7
  ```
 
 # CONGRATULATIONS! Your HA cluster is now deployed!
-
 
 
