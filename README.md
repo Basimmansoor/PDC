@@ -143,4 +143,17 @@ CENTOS7
 
 # CONGRATULATIONS! Your HA cluster is now deployed!
 
+# After rebooting both nodes
+```
+> (BOTH NODES)  drbdadm up r0
+> (NODE1)  drbdadm primary r0
+> (BOTH NODES)  drbdadm status
+> (NODE1) pcs cluster start --all
+> (NODE1)  pcs cluster enable --all
+> (BOTH NODES) pcs status
+> (BOTH NODES)  pcs status corosync
+> (BOTH NODES)  pcs status cluster
+
+```
+
 
